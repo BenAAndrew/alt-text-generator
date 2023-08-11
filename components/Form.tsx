@@ -19,8 +19,18 @@ const Form = ({ handleSubmit }: { handleSubmit: FormEventHandler }) => {
         />
       </div>
       <div className="mb-4">
-        <input className="mr-2 leading-tight" type="checkbox" id="include-all" name="include-all" />
-        <label className="text-gray-700 text-sm font-bold mb-2" htmlFor="include-all">Include images with an alt</label>
+        <input
+          className="mr-2 leading-tight"
+          type="checkbox"
+          id="include-all"
+          name="include-all"
+        />
+        <label
+          className="text-gray-700 text-sm font-bold mb-2"
+          htmlFor="include-all"
+        >
+          Include images with an alt
+        </label>
       </div>
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

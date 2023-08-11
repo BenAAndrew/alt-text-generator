@@ -31,22 +31,36 @@ export default function Home() {
     const html = await response.text();
     const domain = extractDomain(url);
     const $ = cheerio.load(html);
-    const images = includeAllImages ? $("img") : $("img").filter((_,image) => !$(image).attr("alt"));
+    const images = includeAllImages
+      ? $("img")
+      : $("img").filter((_, image) => !$(image).attr("alt"));
 
     if (images.length === 0) {
-      alert(includeAllImages ? "No images found" : "No images found without alt");
+      alert(
+        includeAllImages ? "No images found" : "No images found without alt",
+      );
       setIsLoading(false);
       return;
     }
-    setProgressMessage(includeAllImages ? `${images.length} images found` : `${images.length} images found without alt`);
+    setProgressMessage(
+      includeAllImages
+        ? `${images.length} images found`
+        : `${images.length} images found without alt`,
+    );
 
     const imageToAlt: { [key: string]: string } = {};
     let processed = 0;
 
     for (const image of images) {
       const src = $(image).attr("src")!;
-      const url = isValidURL(src) ? src : src.startsWith('/') ? `${domain}${src}` : `${domain}/${src}`;
-      const altText = imageToAlt[url] ? imageToAlt[url] : await generateAltText(url);
+      const url = isValidURL(src)
+        ? src
+        : src.startsWith("/")
+        ? `${domain}${src}`
+        : `${domain}/${src}`;
+      const altText = imageToAlt[url]
+        ? imageToAlt[url]
+        : await generateAltText(url);
       imageToAlt[url] = altText;
       $(image).attr("alt", altText);
       processed += 1;
