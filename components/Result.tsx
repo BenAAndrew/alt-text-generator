@@ -25,12 +25,12 @@ const Result = ({ imageToAlt, newPage }: { imageToAlt: { [key: string]: string }
                     <th style={{ width: "60%" }}></th>
                 </tr>
                 {Object.entries(imageToAlt).map(
-                    ([url, alt]) => (<tr>
+                    ([url, alt]) => (<tr key={url}>
                         <td>
-                            <img src={url} style={{ width: "150px" }} />
+                            <img src={url} style={{ width: "150px" }} alt={alt} />
                         </td>
                         <td>
-                            <p>"{alt}"</p>
+                            <p>&quot;{alt}&quot;</p>
                         </td>
                     </tr>)
                 )}
