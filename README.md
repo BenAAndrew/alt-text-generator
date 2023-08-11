@@ -1,5 +1,6 @@
 # Alt text generator 
 Generate website image alt text automatically.
+Scans your entire website so that you don't have to upload images one at a time.
 
 ## Installation
 Before starting, ensure you have Node 18 installed.
