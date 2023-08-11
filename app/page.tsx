@@ -20,24 +20,25 @@ export default function Home() {
     setProgressMessage("Loading web page");
 
     const url = event.target.url.value;
+    const includeAllImages = event.target["include-all"].checked;
     const response = await fetch(url);
     if (response.status !== 200) {
       alert("Invalid web page");
       setIsLoading(false);
       return;
     }
-    const html = await response.text();
 
+    const html = await response.text();
     const domain = extractDomain(url);
     const $ = cheerio.load(html);
-    const images = $("img");
+    const images = includeAllImages ? $("img") : $("img").filter((_,image) => !$(image).attr("alt"));
 
     if (images.length === 0) {
-      alert("No images found");
+      alert(includeAllImages ? "No images found" : "No images found without alt");
       setIsLoading(false);
       return;
     }
-    setProgressMessage(`${images.length} images found`);
+    setProgressMessage(includeAllImages ? `${images.length} images found` : `${images.length} images found without alt`);
 
     const imageToAlt: { [key: string]: string } = {};
     let processed = 0;
@@ -45,7 +46,7 @@ export default function Home() {
     for (const image of images.slice(0, 2)) {
       const src = $(image).attr("src")!;
       const url = isValidURL(src) ? src : `${domain}/${src}`;
-      const altText = await generateAltText(url);
+      const altText = imageToAlt[url] ? imageToAlt[url] : await generateAltText(url);
       imageToAlt[url] = altText;
       $(image).attr("alt", altText);
       processed += 1;
