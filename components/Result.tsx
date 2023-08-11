@@ -34,7 +34,7 @@ const Result = ({
           <th className="w-4/5"></th>
         </tr>
         {Object.entries(imageToAlt).map(([url, alt]) => (
-          <tr key={url}>
+          <tr key={url} className="h-20">
             <td>
               <img src={url} className="w-20" alt={alt} />
             </td>

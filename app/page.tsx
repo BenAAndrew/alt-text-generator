@@ -21,7 +21,7 @@ export default function Home() {
 
     const url = event.target.url.value;
     const includeAllImages = event.target["include-all"].checked;
-    const response = await fetch(url);
+    const response = await fetch(`/api?url=${url}&isText=true`);
     if (response.status !== 200) {
       alert("Invalid web page");
       setIsLoading(false);
@@ -45,7 +45,7 @@ export default function Home() {
 
     for (const image of images.slice(0, 2)) {
       const src = $(image).attr("src")!;
-      const url = isValidURL(src) ? src : `${domain}/${src}`;
+      const url = isValidURL(src) ? src : src.startsWith('/') ? `${domain}${src}` : `${domain}/${src}`;
       const altText = imageToAlt[url] ? imageToAlt[url] : await generateAltText(url);
       imageToAlt[url] = altText;
       $(image).attr("alt", altText);

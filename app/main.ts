@@ -13,9 +13,7 @@ export function isValidURL(str: string) {
 }
 
 export async function generateAltText(url: string) {
-  console.log();
-  const imageRequest = await fetch(url);
-  console.log(imageRequest);
+  const imageRequest = await fetch(`/api?url=${url}&isText=false`);
   const image = await imageRequest.arrayBuffer();
 
   const request = await fetch(API_URL, {
