@@ -32,7 +32,7 @@ export default function Home() {
     const $ = cheerio.load(html);
     const images = $("img");
 
-    if (images.length === 0){
+    if (images.length === 0) {
       alert("No images found");
       setIsLoading(false);
       return;
@@ -42,7 +42,7 @@ export default function Home() {
     const imageToAlt: { [key: string]: string } = {};
     let processed = 0;
 
-    for (const image of images.slice(0,2)) {
+    for (const image of images.slice(0, 2)) {
       const src = $(image).attr("src")!;
       const url = isValidURL(src) ? src : `${domain}/${src}`;
       const altText = await generateAltText(url);
@@ -62,7 +62,7 @@ export default function Home() {
     <section className="border border-gray-300 bg-white rounded-lg shadow-lg mt-16 w-full hover:shadow-2xl transition">
       <div className="px-8 pt-6 pb-8">
         {Object.keys(imageToAlt).length > 0 ? (
-          <Result imageToAlt={imageToAlt} newPage={newPage}/>
+          <Result imageToAlt={imageToAlt} newPage={newPage} />
         ) : isLoading ? (
           <ProgressBar
             progressPercentage={progress}

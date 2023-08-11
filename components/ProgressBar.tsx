@@ -1,14 +1,21 @@
-const ProgressBar = ({ progressPercentage, message }: { progressPercentage: number, message: string }) => {
-    return (
-        <>
-            <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                <div className="bg-blue-600 h-2.5 rounded-full" style={{width: `${progressPercentage}%`}}></div>
-            </div>
-            <div className="mt-4">
-                {message}...
-            </div>
-        </>
-    );
+const ProgressBar = ({
+  progressPercentage,
+  message,
+}: {
+  progressPercentage: number;
+  message: string;
+}) => {
+  return (
+    <>
+      <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div
+          className="bg-blue-600 h-2.5 rounded-full"
+          style={{ width: `${progressPercentage}%` }}
+        ></div>
+      </div>
+      <div className="mt-4">{message}...</div>
+    </>
+  );
 };
 
 export default ProgressBar;
