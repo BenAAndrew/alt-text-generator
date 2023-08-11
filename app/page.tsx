@@ -43,7 +43,7 @@ export default function Home() {
     const imageToAlt: { [key: string]: string } = {};
     let processed = 0;
 
-    for (const image of images.slice(0, 2)) {
+    for (const image of images) {
       const src = $(image).attr("src")!;
       const url = isValidURL(src) ? src : src.startsWith('/') ? `${domain}${src}` : `${domain}/${src}`;
       const altText = imageToAlt[url] ? imageToAlt[url] : await generateAltText(url);
